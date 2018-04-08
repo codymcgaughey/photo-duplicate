@@ -20,7 +20,7 @@ numCopies = int(input("How many image files do you need?"))
 srcImg = input("Enter the path of the image file you want to copy: ")
 srcPath = os.path.abspath(srcImg)
 
-
+# Testing Output
 print("Input source: " + srcPath)
 print("Input image: " + srcImg)
 print("Output folder: " + dstPath)
@@ -34,4 +34,11 @@ os.makedirs('~/Desktop/photoduplicate', )
 
 # Copy file
 for i in range(numCopies):
-    shutil.copy2(srcImg, '~/Desktop/photoduplicate/{}.png'.format(i))
+    shutil.copy2(srcImg, '~/Desktop/photoduplicate/{:02}.png'.format(i))
+
+
+# TODO
+# Use branches
+# Make loop to check if default destination path exists
+# Add functionality for multiple image types
+
