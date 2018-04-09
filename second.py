@@ -1,11 +1,31 @@
 import os
 import shutil
+import subprocess
+import platform
 
-# srcPath = ""
-# srcImg = ""
-# dstPath = ""
+########################
+# Initializations
+
+EXTENSIONS = ['jpg', 'jpeg', 'png']
+OSPATH = os.path.abspath('~/Desktop/photoduplicate')
 dstImg = ""
-# numCopies = 0
+
+
+########################
+# Functions
+
+# open folder after process is ran
+def open_file(OSPATH):
+    if platform.system() == "Windows":
+        os.startfile(OSPATH)
+    elif platform.system() == "Darwin":
+        subprocess.Popen(["open", OSPATH])
+    else:
+        subprocess.Popen(["xdg-open", OSPATH])
+
+
+########################
+# User Input
 
 # Have user name folder. Creates folder on desktop.
 dstPath = input("Name the folder where the images will be stored: ")
@@ -36,23 +56,24 @@ print("Input source: " + srcPath)
 print("Input image: " + srcImg)
 print("Output folder: " + dstPath)
 
+# Create destination folder based on user input
+# if not os.path.exists(dstPath):
+#    os.makedirs(dstPath)
 
-# Create destination folder
-if not os.path.exists(dstPath):
-    os.makedirs(dstPath)
-
+# Create default destination folder
 os.makedirs('~/Desktop/photoduplicate')
 
-# Copy file
-
+# Copy files
 if srcExt == '.png':
     for i in range(1, numCopies + 1):
         shutil.copy2(srcImg, '~/Desktop/photoduplicate/{:02}.png'.format(i))
 else:
     print('Incompatible file type')
 
-# TODO
+# Open folder after process is ran
+open_file(OSPATH)
+
+# TODO:
 # Use branches
 # Make loop to check if default destination path exists
-# Add functionality for multiple image types
 
