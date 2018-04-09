@@ -14,11 +14,22 @@ dstPath = input("Name the folder where the images will be stored: ")
 dstPath = os.path.join('~/Desktop', dstPath)
 
 # Have user select amount of copies
-numCopies = int(input("How many image files do you need?"))
+numCopies = int(input("How many image files do you need? "))
 
 # User input, set to absolute path name
-srcImg = input("Enter the path of the image file you want to copy: ")
-srcPath = os.path.abspath(srcImg)
+isPath = 0
+
+while isPath == 0:
+    srcImg = input("Enter the path of the image file you want to copy: ")
+    srcPath = os.path.abspath(srcImg)
+    if os.path.exists(srcPath) == False:
+        print("Path doesn't exist.")
+        isPath = 0
+    else:
+        isPath = 1
+
+# Gets file type
+srcExt = os.path.splitext(srcImg)[1]
 
 # Testing Output
 print("Input source: " + srcPath)
@@ -30,12 +41,15 @@ print("Output folder: " + dstPath)
 if not os.path.exists(dstPath):
     os.makedirs(dstPath)
 
-os.makedirs('~/Desktop/photoduplicate', )
+os.makedirs('~/Desktop/photoduplicate')
 
 # Copy file
-for i in range(numCopies):
-    shutil.copy2(srcImg, '~/Desktop/photoduplicate/{:02}.png'.format(i))
 
+if srcExt == '.png':
+    for i in range(1, numCopies + 1):
+        shutil.copy2(srcImg, '~/Desktop/photoduplicate/{:02}.png'.format(i))
+else:
+    print('Incompatible file type')
 
 # TODO
 # Use branches
