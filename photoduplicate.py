@@ -11,7 +11,6 @@ EXTENSIONS = ['jpg', 'jpeg', 'png']
 OSPATH = os.path.abspath('~/Desktop/photoduplicate')
 dstImg = ""
 
-
 ########################
 # Functions
 
@@ -23,7 +22,6 @@ def open_file(OSPATH):
         subprocess.Popen(["open", OSPATH])
     else:
         subprocess.Popen(["xdg-open", OSPATH])
-
 
 ########################
 # User Input
@@ -74,7 +72,6 @@ else:
 # Open folder after process is ran
 open_file(OSPATH)
 
+# TODO: check if default destination path exists
 # TODO:
-# Use branches
-# Make loop to check if default destination path exists
 
