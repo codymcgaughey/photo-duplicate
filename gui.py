@@ -5,27 +5,22 @@ import shutil
 import subprocess
 import platform
 
+# Constants
 OSPATH = os.path.abspath('~/Desktop/photoduplicate')
 
-
+# TK
 root = Tk()
-
-
-
 root.title("Photo Duplicate")
-#####
+
 # Functions
 
-def printName(event):
-    print("hello")
-
-#def open_file(event):
- #   if platform.system() == "Windows":
-  #      os.startfile(OSPATH)
-   # elif platform.system() == "Darwin":
-    #    subprocess.Popen(["open", OSPATH])
-   # else:
-    #    pass
+def open_file(OSPATH):
+    if platform.system() == "Windows":
+        os.startfile(OSPATH)
+    elif platform.system() == "Darwin":
+        subprocess.Popen(["open", OSPATH])
+    else:
+        subprocess.Popen(["xdg-open", OSPATH])
 
 # WORKING
 def getFile(event):
@@ -35,61 +30,70 @@ def getFile(event):
                                                filetypes = (("jpeg files","*.jpg"),
                                                             ("png files","*.png"),
                                                             ("all files","*.*")))
-
     return filename
+
 
 #WORKING
 def getNum(event):
     global fileamount
     fileamount = numImagesEntry.get()
+    fileamount = int(fileamount)
 
 
+# Copy Files
+def copyFiles(event):
+    os.makedirs('~/Desktop/photoduplicate')
+    for i in range(1, fileamount + 1):
+       shutil.copy2(filename, '~/Desktop/photoduplicate/{:02}'.format(i))
+    print("submitted")
 
 #####
 # Layout
 
 # TODO
-# Edit Button Size, move submit to right side
 # Remove entry for path, replace with text field that shows path
 # Add functionality for submit
 # Add functionality to open output folder
-# Let user choose output folder
 # Clean up source code
 #
 
+# Frames
 topFrame = Frame(root)
 topFrame.pack()
 bottomFrame = Frame(root)
 bottomFrame.pack(side=BOTTOM)
 
-numImagesLabel = Label(bottomFrame, text="Number of copies: ") # text field descriptor
-srcPathLabel = Label(bottomFrame, text="Path of image file: ") # text field descriptor
+# Labels
+numImagesLabel = Label(bottomFrame, text="Number of copies: ")
+numImagesLabel.grid(row=1, sticky=E)
 
+srcPathLabel = Label(bottomFrame, text="Path of image file: ")
+srcPathLabel.grid(row=2, sticky=E)
 
-numImagesEntry = Entry(bottomFrame) # input
-srcPathEntry = Entry(bottomFrame, ) # input
+# Entries
+numImagesEntry = Entry(bottomFrame)
+numImagesEntry.grid(row=1, column=1)
 
+srcPathEntry = Entry(bottomFrame, )
+srcPathEntry.grid(row=2, column=1)
 
-submitButton = Button(bottomFrame, text="Submit Images") # display button
-submitButton.bind("<Button-1>", printName) # activate button, printName = function
-
+# Buttons
 numButton = Button(bottomFrame, text="Submit Number")
 numButton.grid(row=1, column=2)
 numButton.bind("<Button-1>", getNum)
 
-numImagesLabel.grid(row=1, sticky=E) # display descriptor
-numImagesEntry.grid(row=1, column=1) # display entry field
-
-srcPathLabel.grid(row=2, sticky=E)
-srcPathEntry.grid(row=2, column=1)
-
-# Add function to open directory
 srcPathButton = Button(bottomFrame, text="Select File")
 srcPathButton.bind("<Button-1>", getFile)
-srcPathButton.grid(row=2, column=2, sticky=E)
+srcPathButton.grid(row=2, column=2, sticky=(W,E))
 
 
-submitButton.grid(row=3, column=2, sticky=E) # display button
+    # Add function to make copies, open directory
+submitButton = Button(bottomFrame, text="Submit Images")
+submitButton.bind("<Button-1>", copyFiles)
+submitButton.grid(row=3, column=2, sticky=(W,E))
+
+
+
 
 
 

@@ -27,10 +27,10 @@ def open_file(OSPATH):
 # User Input
 
 # Have user name folder. Creates folder on desktop.
-dstPath = input("Name the folder where the images will be stored: ")
+# dstPath = input("Name the folder where the images will be stored: ")
 
 # Set destination path/output folder
-dstPath = os.path.join('~/Desktop', dstPath)
+# dstPath = os.path.join('~/Desktop', dstPath)
 
 # Have user select amount of copies
 numCopies = int(input("How many image files do you need? "))
