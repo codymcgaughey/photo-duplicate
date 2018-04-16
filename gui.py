@@ -44,18 +44,18 @@ def getNum(event):
 def copyFiles(event):
     os.makedirs('~/Desktop/photoduplicate')
     for i in range(1, fileamount + 1):
-       shutil.copy2(filename, '~/Desktop/photoduplicate/{:02}'.format(i))
+       shutil.copy2(filename, '~/Desktop/photoduplicate/{:02}.png'.format(i))
     print("submitted")
+    open_file(OSPATH)
 
 #####
 # Layout
 
 # TODO
 # Remove entry for path, replace with text field that shows path
-# Add functionality for submit
-# Add functionality to open output folder
+# Show number of copies to be made
 # Clean up source code
-#
+# Add image format extensions
 
 # Frames
 topFrame = Frame(root)
@@ -74,8 +74,8 @@ srcPathLabel.grid(row=2, sticky=E)
 numImagesEntry = Entry(bottomFrame)
 numImagesEntry.grid(row=1, column=1)
 
-srcPathEntry = Entry(bottomFrame, )
-srcPathEntry.grid(row=2, column=1)
+#srcPathEntry = Entry(bottomFrame, )
+#srcPathEntry.grid(row=2, column=1)
 
 # Buttons
 numButton = Button(bottomFrame, text="Submit Number")
@@ -91,10 +91,6 @@ srcPathButton.grid(row=2, column=2, sticky=(W,E))
 submitButton = Button(bottomFrame, text="Submit Images")
 submitButton.bind("<Button-1>", copyFiles)
 submitButton.grid(row=3, column=2, sticky=(W,E))
-
-
-
-
 
 
 

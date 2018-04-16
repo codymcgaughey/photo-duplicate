@@ -9,7 +9,7 @@ import platform
 
 EXTENSIONS = ['jpg', 'jpeg', 'png']
 OSPATH = os.path.abspath('~/Desktop/photoduplicate')
-dstImg = ""
+#dstImg = ""
 
 ########################
 # Functions
@@ -27,10 +27,10 @@ def open_file(OSPATH):
 # User Input
 
 # Have user name folder. Creates folder on desktop.
-# dstPath = input("Name the folder where the images will be stored: ")
+#dstPath = input("Name the folder where the images will be stored: ")
 
 # Set destination path/output folder
-# dstPath = os.path.join('~/Desktop', dstPath)
+#dstPath = os.path.join('~/Desktop', dstPath)
 
 # Have user select amount of copies
 numCopies = int(input("How many image files do you need? "))
@@ -53,11 +53,11 @@ srcExt = os.path.splitext(srcImg)[1]
 # Testing Output
 print("Input source: " + srcPath)
 print("Input image: " + srcImg)
-print("Output folder: " + dstPath)
+# print("Output folder: " + dstPath)
 
 # Create destination folder based on user input
-# if not os.path.exists(dstPath):
-#    os.makedirs(dstPath)
+#if not os.path.exists(dstPath):
+    #os.makedirs(dstPath)
 
 # Create default destination folder
 os.makedirs('~/Desktop/photoduplicate')
