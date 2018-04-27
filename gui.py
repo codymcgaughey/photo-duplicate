@@ -10,6 +10,7 @@ OSPATH = os.path.abspath('~/Desktop/photoduplicate')
 
 # TK
 root = Tk()
+filenamedisplay = StringVar()
 root.title("Photo Duplicate")
 
 # Functions
@@ -23,7 +24,11 @@ def open_file(OSPATH):
         subprocess.Popen(["xdg-open", OSPATH])
 
 # WORKING
-def getFile(event):
+def get_file(event):
+    global fileamount
+    fileamount = numImagesEntry.get()
+    fileamount = int(fileamount)
+
     global filename
     filename = filedialog.askopenfilename(initialdir = "Desktop/",
                                                title = "Select file",
@@ -32,16 +37,15 @@ def getFile(event):
                                                             ("all files","*.*")))
     return filename
 
-
 #WORKING
-def getNum(event):
+def get_num(event):
     global fileamount
     fileamount = numImagesEntry.get()
     fileamount = int(fileamount)
 
 
 # Copy Files
-def copyFiles(event):
+def copy_files(event):
     os.makedirs('~/Desktop/photoduplicate')
     for i in range(1, fileamount + 1):
        shutil.copy2(filename, '~/Desktop/photoduplicate/{:02}.png'.format(i))
@@ -74,24 +78,22 @@ srcPathLabel.grid(row=2, sticky=E)
 numImagesEntry = Entry(bottomFrame)
 numImagesEntry.grid(row=1, column=1)
 
-#srcPathEntry = Entry(bottomFrame, )
-#srcPathEntry.grid(row=2, column=1)
+srcPathDisplay = Label(bottomFrame, )
+srcPathDisplay.grid(row=2, column=1)
 
 # Buttons
 numButton = Button(bottomFrame, text="Submit Number")
 numButton.grid(row=1, column=2)
-numButton.bind("<Button-1>", getNum)
+numButton.bind("<Button-1>", get_num)
 
 srcPathButton = Button(bottomFrame, text="Select File")
-srcPathButton.bind("<Button-1>", getFile)
+srcPathButton.bind("<Button-1>", get_file)
 srcPathButton.grid(row=2, column=2, sticky=(W,E))
 
-
-    # Add function to make copies, open directory
+# Add function to make copies, open directory
 submitButton = Button(bottomFrame, text="Submit Images")
-submitButton.bind("<Button-1>", copyFiles)
+submitButton.bind("<Button-1>", copy_files)
 submitButton.grid(row=3, column=2, sticky=(W,E))
-
 
 
 root.mainloop()
